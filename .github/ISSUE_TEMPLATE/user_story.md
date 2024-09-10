@@ -1,7 +1,7 @@
 ---
 name: User Story
 about: Use this for User Stories.
-title: "As a [who?], I want [what?], so that [why?]"
+title: 'As a [who?], I want [what?], so that [why?]'
 labels: ''
 assignees: ''
 milestone: 'Backlog'
@@ -9,4 +9,4 @@ milestone: 'Backlog'
 
 Acceptance Criteria:
 
-- 
+-
