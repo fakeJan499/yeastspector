@@ -1,4 +1,4 @@
-import Z from 'Zod';
+import Z from 'zod';
 
 export const publicVariablesSchema = Z.object({});
 
