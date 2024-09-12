@@ -23,3 +23,5 @@ jobs:
             - run: npm run lint
             - run: npm run test run
             - run: npm run build -- --no-lint
+            - run: npm run prisma format -- --check
+            - run: npm run prisma validate

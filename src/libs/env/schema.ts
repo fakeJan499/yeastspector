@@ -9,5 +9,7 @@ export const allVariablesSchema = publicVariablesSchema.merge(
         AUTH0_ISSUER_BASE_URL: Z.string().url(),
         AUTH0_CLIENT_ID: Z.string(),
         AUTH0_CLIENT_SECRET: Z.string(),
+
+        DATABASE_URL: Z.string().url(),
     }),
 );

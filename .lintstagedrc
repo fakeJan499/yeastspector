@@ -1,4 +1,5 @@
 {
     "*": ["npx prettier --check"],
-    "src/**/*": ["npm run lint -- --file"]
+    "src/**/*": ["npm run lint -- --file"],
+    "prisma/**/*": ["npm run prisma:local format -- --check", "npm run prisma:local validate"]
 }
