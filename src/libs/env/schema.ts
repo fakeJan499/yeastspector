@@ -1,6 +1,9 @@
+import { stringBooleanSchema } from '@/libs/utils/schemas';
 import Z from 'zod';
 
-export const publicVariablesSchema = Z.object({});
+export const publicVariablesSchema = Z.object({
+    NEXT_PUBLIC_DEBUG_TRANSLATIONS: stringBooleanSchema.default(false),
+});
 
 export const allVariablesSchema = publicVariablesSchema.merge(
     Z.object({
