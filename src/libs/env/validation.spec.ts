@@ -13,7 +13,10 @@ describe('Env Variables Validation', () => {
         const consoleSpy = mockConsole.mockError();
         const processExitSpy = mockProcess.mockExit();
         mockProcess.mockEnv();
-        vi.spyOn(allVariablesSchema, 'safeParse').mockReturnValue({ success: true, data: {} });
+        vi.spyOn(allVariablesSchema, 'safeParse').mockReturnValue({
+            success: true,
+            data: {} as Z.infer<typeof allVariablesSchema>,
+        });
 
         validateEnvVariables();
 
