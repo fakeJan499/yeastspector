@@ -1,5 +1,6 @@
 import { useLanguage } from '@/libs/i18n';
 import type { Metadata } from 'next';
+import { PublicEnvScript } from 'next-runtime-env';
 import localFont from 'next/font/local';
 import './globals.css';
 
@@ -28,6 +29,9 @@ export default async function RootLayout({
 
     return (
         <html lang={lang}>
+            <head>
+                <PublicEnvScript />
+            </head>
             <body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body>
         </html>
     );

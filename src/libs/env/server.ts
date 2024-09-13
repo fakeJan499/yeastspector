@@ -1,10 +1,11 @@
 import Z from 'zod';
 import { allVariablesSchema } from './schema';
-
-const env = allVariablesSchema.parse(process.env);
+import { env } from 'next-runtime-env';
 
 export const getEnvVariable = <K extends keyof Z.infer<typeof allVariablesSchema>>(
     key: K,
 ): Z.infer<typeof allVariablesSchema>[K] => {
-    return env[key];
+    const variable = env(key);
+
+    return allVariablesSchema.shape[key].parse(variable) as Z.infer<typeof allVariablesSchema>[K];
 };
