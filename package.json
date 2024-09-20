@@ -21,7 +21,7 @@
         "i18next": "^23.15.1",
         "i18next-intervalplural-postprocessor": "^3.0.0",
         "i18next-resources-to-backend": "^1.2.1",
-        "next": "14.2.8",
+        "next": "14.2.12",
         "next-runtime-env": "^3.2.2",
         "react": "^18",
         "react-dom": "^18",
@@ -43,7 +43,9 @@
         "lint-staged": "^15.2.10",
         "prettier": "^3.3.3",
         "prisma": "^5.19.1",
+        "prisma-json-types-generator": "^3.0.4",
         "typescript": "^5",
+        "uuid": "^10.0.0",
         "vite-tsconfig-paths": "^5.0.1",
         "vitest": "^2.0.5"
     }
