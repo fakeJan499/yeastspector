@@ -1,4 +1,6 @@
 import { useLanguage } from '@/libs/i18n';
+import { LocalizationProvider, ThemeProvider } from '@/libs/ui';
+import { Container } from '@mui/material';
 import type { Metadata } from 'next';
 import { PublicEnvScript } from 'next-runtime-env';
 import localFont from 'next/font/local';
@@ -32,7 +34,13 @@ export default async function RootLayout({
             <head>
                 <PublicEnvScript />
             </head>
-            <body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body>
+            <body className={`${geistSans.variable} ${geistMono.variable}`}>
+                <ThemeProvider>
+                    <LocalizationProvider>
+                        <Container>{children}</Container>
+                    </LocalizationProvider>
+                </ThemeProvider>
+            </body>
         </html>
     );
 }

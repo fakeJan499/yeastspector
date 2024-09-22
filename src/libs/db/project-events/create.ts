@@ -1,5 +1,5 @@
 import { DbClient } from '@/libs/db/db-client';
-import { ProjectCreatedEvent, ProjectEventCreate, ProjectEvent } from './models';
+import { ProjectCreatedEvent, ProjectEvent, ProjectEventCreate } from './models';
 
 export const createProjectCreatedEvent = async (
     db: DbClient,

@@ -1,0 +1,34 @@
+{
+    "header": "Dodaj projekt",
+    "form": {
+        "fields": {
+            "name": {
+                "label": "Nazwa",
+                "placeholder": "",
+                "errors": {
+                    "required": "Nazwa jest wymagana.",
+                    "min-length": "Nazwa musi mieć co najmniej {{count}} $t(general:plurals.chars, { \"count\": {{count}}, \"postProcess\": \"interval\", \"applyPostProcessor\": true }).",
+                    "max-length": "Nazwa nie może mieć więcej niż {{count}} $t(general:plurals.chars, { \"count\": {{count}}, \"postProcess\": \"interval\", \"applyPostProcessor\": true })."
+                }
+            },
+            "description": {
+                "label": "Opis (opcjonalny)",
+                "placeholder": "",
+                "errors": {
+                    "max-length": "Opis jest za długi o {{count}} $t(general:plurals.chars, { \"count\": {{count}}, \"postProcess\": \"interval\", \"applyPostProcessor\": true })."
+                }
+            },
+            "date": {
+                "label": "Data rozpoczęcia",
+                "errors": {
+                    "required": "Data nastawienia jest wymagana.",
+                    "max": "Data nastawienia nie może być późniejsza niż dzisiaj."
+                }
+            }
+        },
+        "actions": {
+            "submit": "Dodaj",
+            "cancel": "Anuluj"
+        }
+    }
+}

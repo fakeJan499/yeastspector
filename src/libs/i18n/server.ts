@@ -3,7 +3,7 @@ import { createInstance } from 'i18next';
 import intervalPlural from 'i18next-intervalplural-postprocessor';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { initReactI18next } from 'react-i18next/initReactI18next';
-import { I18nAsyncProvider } from './models';
+import { I18nAsyncProvider, SupportedLanguage } from './models';
 import { fallbackLanguage, getOptions } from './options';
 
 const initI18next = async (lng: string, ns: string | string[]) => {
@@ -29,6 +29,6 @@ export const useI18n: I18nAsyncProvider = async config => {
 
     return {
         t: i18nextInstance.getFixedT(lng, config.nameSpace),
-        lang: i18nextInstance.resolvedLanguage || lng,
+        lang: (i18nextInstance.resolvedLanguage || lng) as SupportedLanguage,
     };
 };

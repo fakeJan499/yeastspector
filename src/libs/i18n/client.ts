@@ -6,7 +6,7 @@ import intervalPlural from 'i18next-intervalplural-postprocessor';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { useEffect, useState } from 'react';
 import { initReactI18next, useTranslation } from 'react-i18next';
-import { I18nSyncProvider } from './models';
+import { I18nSyncProvider, SupportedLanguage } from './models';
 import { fallbackLanguage, getOptions, languages } from './options';
 
 const runsOnServerSide = typeof window === 'undefined';
@@ -49,6 +49,6 @@ export const useClientI18n: I18nSyncProvider = config => {
     }
     return {
         t,
-        lang: i18n.resolvedLanguage || lng,
+        lang: (i18n.resolvedLanguage || lng) as SupportedLanguage,
     };
 };
