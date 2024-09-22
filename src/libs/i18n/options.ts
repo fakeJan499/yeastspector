@@ -1,8 +1,8 @@
 import { InitOptions } from 'i18next';
-import { TranslationNamespace } from './models';
+import { SupportedLanguage, TranslationNamespace } from './models';
 
-export const fallbackLanguage = 'pl';
-export const languages = [fallbackLanguage];
+export const fallbackLanguage: SupportedLanguage = 'pl';
+export const languages: SupportedLanguage[] = [fallbackLanguage];
 const sharedNamespaces: TranslationNamespace[] = ['general'];
 
 export const getOptions = (

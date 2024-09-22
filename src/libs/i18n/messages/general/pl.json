@@ -1,3 +1,5 @@
 {
-    "plurals": {}
+    "plurals": {
+        "chars": "(1)[znak];(2-4)[znaki];(5-inf)[znaków];"
+    }
 }

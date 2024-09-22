@@ -1,9 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-
-type DbClient = Omit<
-    PrismaClient,
-    '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'
->;
+import { DbClient } from './db-client';
 
 const prisma = new PrismaClient();
 

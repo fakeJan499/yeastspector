@@ -1,0 +1,27 @@
+{
+    "header": "Moje Projekty",
+    "actions": {
+        "add-project": "Dodaj projekt"
+    },
+    "list": {
+        "empty": "Brak Projektów",
+        "sort": "Sortuj",
+        "columns": {
+            "name": {
+                "header": "Nazwa"
+            },
+            "description": {
+                "header": "Opis"
+            },
+            "creation-date": {
+                "header": "Rozpoczęcie"
+            }
+        },
+        "pagination": {
+            "next": "Następna strona",
+            "previous": "Poprzednia strona",
+            "rows-per-page": "Wierszy na stronę:",
+            "displayed-rows": "{{from}} - {{to}} z {{count}}"
+        }
+    }
+}

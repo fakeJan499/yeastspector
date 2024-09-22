@@ -2,7 +2,26 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator json {
+  provider  = "prisma-json-types-generator"
+  namespace = "PrismaJson"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Projects {
+  uuid   String          @id @default(uuid()) @db.Uuid
+  userId String
+  events ProjectEvents[]
+}
+
+model ProjectEvents {
+  uuid        String   @id @default(uuid()) @db.Uuid
+  projectUuid String   @db.Uuid
+  project     Projects @relation(fields: [projectUuid], references: [uuid], onDelete: Cascade, onUpdate: Cascade)
+  /// [ProjectEventData]
+  data        Json     @db.JsonB
 }
