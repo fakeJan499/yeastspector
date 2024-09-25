@@ -14,5 +14,11 @@ export const allVariablesSchema = publicVariablesSchema.merge(
         AUTH0_CLIENT_SECRET: Z.string(),
 
         DATABASE_URL: Z.string().url(),
+
+        FIREBASE_API_KEY: Z.string(),
+        FIREBASE_AUTH_DOMAIN: Z.string(),
+        FIREBASE_STORAGE_BUCKET: Z.string(),
+        FIREBASE_USER_EMAIL: Z.string().email(),
+        FIREBASE_USER_PASSWORD: Z.string(),
     }),
 );
