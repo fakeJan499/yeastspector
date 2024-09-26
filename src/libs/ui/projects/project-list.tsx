@@ -5,6 +5,7 @@ import { useClientI18n } from '@/libs/i18n/client';
 import { formatDate } from '@/libs/utils/date';
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
 import { isBefore } from 'date-fns';
+import { ProjectImageCell } from './project-image-cell';
 
 interface Props {
     projects: Project[];
@@ -13,9 +14,17 @@ interface Props {
 export function ProjectList({ projects }: Props) {
     const { t, lang } = useClientI18n({ nameSpace: 'projects' });
 
-    const rows: GridRowsProp<Project> = projects;
+    const rows: GridRowsProp<Project> = projects.map(x => ({ ...x, margin: 2 }));
 
     const columns: GridColDef<Project>[] = [
+        {
+            field: 'image',
+            headerName: t('list.columns.image.header'),
+            sortable: false,
+            width: 72,
+            resizable: false,
+            renderCell: ({ row }) => <ProjectImageCell project={row} />,
+        },
         { field: 'name', headerName: t('list.columns.name.header'), flex: 1 },
         {
             field: 'description',
@@ -42,7 +51,6 @@ export function ProjectList({ projects }: Props) {
             rows={rows}
             getRowId={row => row.uuid}
             columns={columns}
-            density="compact"
             disableColumnMenu
             localeText={{
                 columnHeaderSortIconLabel: t('list.sort'),

@@ -15,6 +15,9 @@
             },
             "creation-date": {
                 "header": "Rozpoczęcie"
+            },
+            "image": {
+                "header": "Obraz"
             }
         },
         "pagination": {
