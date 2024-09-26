@@ -3,15 +3,15 @@ import { describe, expect, test } from 'vitest';
 import { evolve } from './evolve';
 import { IllegalEventError } from './illegal-event-errors';
 
-describe('evolve', () => {
-    test('should throw an error if trying to apply ProjectCreated event to evolved project', () => {
+describe(`ProjectCreated`, () => {
+    test('should throw an error if trying to apply to evolved project', () => {
         const project = mockAdapter.mockCreatedProject();
         const event = mockAdapter.mockProjectCreateEvent();
 
         expect(() => evolve(project, event)).toThrowError(IllegalEventError);
     });
 
-    test('should evolve project with ProjectCreated event', () => {
+    test('should evolve project', () => {
         const project = mockAdapter.mockBaseProject();
         const event = mockAdapter.mockProjectCreateEvent({
             data: {
@@ -27,5 +27,61 @@ describe('evolve', () => {
         expect(evolvedProject.name).toBe(event.data.name);
         expect(evolvedProject.description).toBe(event.data.description);
         expect(evolvedProject.createdAt).toBe(event.data.date);
+    });
+});
+
+describe(`ProjectImageUploaded`, () => {
+    test('should throw an error if trying to apply to not evolved project', () => {
+        const project = mockAdapter.mockBaseProject();
+        const event = mockAdapter.mockProjectImageUploadedEvent();
+
+        expect(() => evolve(project, event)).toThrowError(IllegalEventError);
+    });
+
+    test('should throw an error if image already exists', () => {
+        const image = mockAdapter.mockProjectImage();
+        const event = mockAdapter.mockProjectImageUploadedEvent({
+            data: { imageUuid: image.uuid },
+        });
+        const project = mockAdapter.mockCreatedProject({
+            images: [image],
+        });
+
+        expect(() => evolve(project, event)).toThrowError(IllegalEventError);
+    });
+
+    test('should add new image', () => {
+        const project = mockAdapter.mockCreatedProject();
+        const event = mockAdapter.mockProjectImageUploadedEvent();
+
+        const evolvedProject = evolve(project, event);
+
+        expect(evolvedProject.images).toHaveLength(project.images.length + 1);
+        expect(evolvedProject.images).toContainEqual({
+            uuid: event.data.imageUuid,
+            url: expect.any(String),
+        });
+    });
+
+    test('should not set hero image if added image is not default', () => {
+        const initialHeroImage = mockAdapter.mockProjectImage();
+        const project = mockAdapter.mockCreatedProject({ heroImage: initialHeroImage });
+        const event = mockAdapter.mockProjectImageUploadedEvent({ data: { isDefault: false } });
+
+        const evolvedProject = evolve(project, event);
+
+        expect(evolvedProject.heroImage).toEqual(initialHeroImage);
+    });
+
+    test('should set hero image if image is default', () => {
+        const project = mockAdapter.mockCreatedProject();
+        const event = mockAdapter.mockProjectImageUploadedEvent({ data: { isDefault: true } });
+
+        const evolvedProject = evolve(project, event);
+
+        expect(evolvedProject.heroImage).toEqual({
+            uuid: event.data.imageUuid,
+            url: expect.any(String),
+        });
     });
 });

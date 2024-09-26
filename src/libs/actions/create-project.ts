@@ -17,6 +17,9 @@ const validation = {
     description: {
         max: 2000,
     },
+    image: {
+        maxSizeInMB: 2,
+    },
 };
 
 export const createProject = createStatefulFormAction(async (_, formData) => {
@@ -32,6 +35,7 @@ export const createProject = createStatefulFormAction(async (_, formData) => {
         name: formData.get('name')?.toString(),
         description: formData.get('description')?.toString(),
         date: parse(formData.get('date')?.toString() ?? '', lang),
+        image: formData.get('image'),
     };
 
     const schema = Z.strictObject({
@@ -62,6 +66,19 @@ export const createProject = createStatefulFormAction(async (_, formData) => {
             {
                 message: t('form.fields.date.errors.max'),
             },
+        ),
+        image: Z.preprocess(
+            file => (file instanceof Blob && file.size ? file : null),
+            Z.instanceof(Blob)
+                .refine(file => file.size <= validation.image.maxSizeInMB * 1024 * 1024, {
+                    message: t('form.fields.image.errors.max-size', {
+                        count: validation.image.maxSizeInMB,
+                    }),
+                })
+                .refine(file => file.type.startsWith('image/'), {
+                    message: t('form.fields.image.errors.invalid-type'),
+                })
+                .nullable(),
         ),
     });
 

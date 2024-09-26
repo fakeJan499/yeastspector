@@ -28,6 +28,13 @@ export const projectCreateMessagesSchema = Z.object({
                     max: Z.string(),
                 }),
             }),
+            image: Z.object({
+                label: Z.string(),
+                errors: Z.object({
+                    'max-size': Z.string(),
+                    'invalid-type': Z.string(),
+                }),
+            }),
         }),
         actions: Z.object({
             submit: Z.string(),

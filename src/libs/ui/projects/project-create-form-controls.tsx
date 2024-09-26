@@ -38,6 +38,7 @@ export function ProjectCreateFormControls({ handleValueChange, errors }: Props) 
                     },
                 }}
             />
+            <input name="image" type="file" accept="image/*" />
             <TextField
                 label={t('form.fields.description.label')}
                 placeholder={t('form.fields.description.placeholder')}

@@ -1,7 +1,7 @@
 import db from '@/libs/db';
 import { mockAdapter, mockDb } from '@/libs/test/mocks';
 import { afterEach, describe, expect, test, vi } from 'vitest';
-import { findMany } from './read';
+import { find, findMany } from './read';
 
 const mocks = vi.hoisted(() => {
     return {
@@ -9,9 +9,10 @@ const mocks = vi.hoisted(() => {
         isEvolved: vi.fn().mockReturnValue(true),
 
         db: {
-            run: vi.fn(),
+            run: vi.fn().mockImplementation(fn => fn()),
             projects: {
                 findMany: vi.fn(),
+                find: vi.fn(),
             },
         },
     };
@@ -31,19 +32,19 @@ vi.mock(import('@/libs/db'), () => {
     };
 });
 
-describe('Projects Adapter findMany', () => {
-    afterEach(() => {
-        vi.restoreAllMocks();
-    });
+afterEach(() => {
+    vi.clearAllMocks();
+});
 
+describe('findMany', () => {
     test('should return projects', async () => {
         const dbClient = {};
         const filter = mockAdapter.mockProjectFilter();
         const projectDetails = mockDb.mockProjectDetails();
         const expectedProject = mockAdapter.mockCreatedProject({ uuid: projectDetails.uuid });
-        mocks.db.run.mockImplementation(fn => fn(dbClient));
-        mocks.db.projects.findMany.mockResolvedValue([projectDetails]);
-        mocks.getState.mockReturnValue(expectedProject);
+        mocks.db.run.mockImplementationOnce(fn => fn(dbClient));
+        mocks.db.projects.findMany.mockResolvedValueOnce([projectDetails]);
+        mocks.getState.mockReturnValueOnce(expectedProject);
 
         const result = await findMany(filter);
 
@@ -60,12 +61,39 @@ describe('Projects Adapter findMany', () => {
         const filter = mockAdapter.mockProjectFilter();
         const projectDetails = mockDb.mockProjectDetails();
         const expectedProject = mockAdapter.mockCreatedProject({ uuid: projectDetails.uuid });
-        mocks.db.run.mockResolvedValue([projectDetails]);
-        mocks.getState.mockReturnValue(expectedProject);
-        mocks.isEvolved.mockReturnValue(false);
+        mocks.db.projects.findMany.mockResolvedValueOnce([projectDetails]);
+        mocks.getState.mockReturnValueOnce(expectedProject);
+        mocks.isEvolved.mockReturnValueOnce(false);
 
         const result = await findMany(filter);
 
         expect(result).toEqual([]);
+    });
+});
+
+describe('find', () => {
+    test('should return null if project not found', async () => {
+        const result = await find(mockAdapter.mockProjectFilter());
+
+        expect(result).toBeNull();
+    });
+
+    test('should return null if project not evolved', async () => {
+        mocks.db.projects.find.mockResolvedValueOnce(mockDb.mockProjectDetails());
+        mocks.isEvolved.mockReturnValueOnce(false);
+
+        const result = await find(mockAdapter.mockProjectFilter());
+
+        expect(result).toBeNull();
+    });
+
+    test('should return project', async () => {
+        const project = mockAdapter.mockCreatedProject();
+        mocks.db.projects.find.mockResolvedValueOnce(mockDb.mockProjectDetails());
+        mocks.getState.mockReturnValueOnce(project);
+
+        const result = await find(mockAdapter.mockProjectFilter());
+
+        expect(result).toEqual(project);
     });
 });

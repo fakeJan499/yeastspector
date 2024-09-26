@@ -24,6 +24,13 @@
                     "required": "Data nastawienia jest wymagana.",
                     "max": "Data nastawienia nie może być późniejsza niż dzisiaj."
                 }
+            },
+            "image": {
+                "label": "Zdjęcie (opcjonalne)",
+                "errors": {
+                    "max-size": "Zdjęcie jest za duże. Maksymalny rozmiar to {{count}} MB.",
+                    "invalid-type": "Zdjęcie ma niepoprawny format."
+                }
             }
         },
         "actions": {
