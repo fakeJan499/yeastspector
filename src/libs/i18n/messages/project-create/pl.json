@@ -27,6 +27,9 @@
             },
             "image": {
                 "label": "Zdjęcie (opcjonalne)",
+                "actions": {
+                    "clear": "Usuń zdjęcie"
+                },
                 "errors": {
                     "max-size": "Zdjęcie jest za duże. Maksymalny rozmiar to {{count}} MB.",
                     "invalid-type": "Zdjęcie ma niepoprawny format."

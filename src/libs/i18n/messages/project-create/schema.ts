@@ -30,6 +30,9 @@ export const projectCreateMessagesSchema = Z.object({
             }),
             image: Z.object({
                 label: Z.string(),
+                actions: Z.object({
+                    clear: Z.string(),
+                }),
                 errors: Z.object({
                     'max-size': Z.string(),
                     'invalid-type': Z.string(),
