@@ -26,7 +26,7 @@ export const create = async (data: ProjectCreateData): Promise<Project> => {
                     data: {
                         type: 'ProjectImageUploaded',
                         imageUuid,
-                        date: new Date(),
+                        date: data.date,
                         isDefault: true,
                     },
                 });

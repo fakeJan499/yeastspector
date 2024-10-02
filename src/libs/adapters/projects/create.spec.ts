@@ -110,3 +110,18 @@ test('should create project with image', async () => {
         projectImageUploadedEventDbResult,
     );
 });
+
+test('should create events with specified date', async () => {
+    const date = new Date();
+    const data = mockProjectCreateData({ date, image: new Blob() });
+
+    await create(data);
+
+    const dateOfProjectCreatedEvent =
+        mocks.db.projectEvents.createProjectCreatedEvent.mock.calls[0][1].data.date;
+    const dateOfProjectImageUploadedEvent =
+        mocks.db.projectEvents.createProjectImageUploadedEvent.mock.calls[0][1].data.date;
+
+    expect(dateOfProjectCreatedEvent).toEqual(date);
+    expect(dateOfProjectImageUploadedEvent).toEqual(date);
+});
