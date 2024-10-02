@@ -1,4 +1,5 @@
 import { mockAdapter } from '@/libs/test/mocks';
+import { validate } from 'uuid';
 import { describe, expect, test } from 'vitest';
 import { evolve } from './evolve';
 import { IllegalEventError } from './illegal-event-errors';
@@ -27,6 +28,16 @@ describe(`ProjectCreated`, () => {
         expect(evolvedProject.name).toBe(event.data.name);
         expect(evolvedProject.description).toBe(event.data.description);
         expect(evolvedProject.createdAt).toBe(event.data.date);
+    });
+
+    test('should set default hero image', () => {
+        const project = mockAdapter.mockBaseProject();
+        const event = mockAdapter.mockProjectCreateEvent();
+
+        const evolvedProject = evolve(project, event);
+
+        expect(evolvedProject.heroImage.url).toEqual('/images/project-default.png');
+        expect(validate(evolvedProject.heroImage.uuid)).toBeTruthy();
     });
 });
 

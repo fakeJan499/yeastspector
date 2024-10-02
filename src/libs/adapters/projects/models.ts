@@ -38,7 +38,7 @@ export type CreatedProject = BaseProject & {
     name: string;
     description: string;
     createdAt: Date;
-    heroImage: ProjectImage | null;
+    heroImage: ProjectImage;
     images: ProjectImage[];
 };
 export type Project = CreatedProject;

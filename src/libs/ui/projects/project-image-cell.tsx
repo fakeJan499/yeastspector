@@ -15,62 +15,54 @@ export function ProjectImageCell({ project }: Props) {
     const [imagePreviewSize, setImagePreviewSize] = useState({ width: 60, height: 60 });
 
     return (
-        project.heroImage && (
-            <NoMaxWidthTooltip
-                disableInteractive={true}
-                onClose={() => setImageLoaded(false)}
-                arrow
-                placement="right"
-                title={
-                    <Box
-                        sx={{
-                            position: 'relative',
-                            width: Math.min(imagePreviewSize.width, 200),
-                            aspectRatio: `${imagePreviewSize.width} / ${imagePreviewSize.height}`,
-                        }}>
-                        {!imageLoaded && (
-                            <Box
-                                sx={{
-                                    position: 'absolute',
-                                    inset: 0,
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}>
-                                <CircularProgress />
-                            </Box>
-                        )}
-                        <Image
-                            src={project.heroImage?.url}
-                            alt={project.name}
-                            fill
-                            objectFit="contain"
-                            onLoad={e => {
-                                setImagePreviewSize({
-                                    width: (e.target as HTMLImageElement).naturalWidth,
-                                    height: (e.target as HTMLImageElement).naturalHeight,
-                                });
-                                setImageLoaded(true);
-                            }}
-                        />
-                    </Box>
-                }>
+        <NoMaxWidthTooltip
+            disableInteractive={true}
+            onClose={() => setImageLoaded(false)}
+            arrow
+            placement="right"
+            title={
                 <Box
                     sx={{
-                        height: '100%',
-                        aspectRatio: '1 / 1',
                         position: 'relative',
-                        margin: '0 auto',
+                        width: Math.min(imagePreviewSize.width, 200),
+                        aspectRatio: `${imagePreviewSize.width} / ${imagePreviewSize.height}`,
                     }}>
+                    {!imageLoaded && (
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                inset: 0,
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}>
+                            <CircularProgress />
+                        </Box>
+                    )}
                     <Image
                         src={project.heroImage?.url}
                         alt={project.name}
                         fill
-                        quality={1}
-                        priority
+                        objectFit="contain"
+                        onLoad={e => {
+                            setImagePreviewSize({
+                                width: (e.target as HTMLImageElement).naturalWidth,
+                                height: (e.target as HTMLImageElement).naturalHeight,
+                            });
+                            setImageLoaded(true);
+                        }}
                     />
                 </Box>
-            </NoMaxWidthTooltip>
-        )
+            }>
+            <Box
+                sx={{
+                    height: '100%',
+                    aspectRatio: '1 / 1',
+                    position: 'relative',
+                    margin: '0 auto',
+                }}>
+                <Image src={project.heroImage?.url} alt={project.name} fill quality={1} priority />
+            </Box>
+        </NoMaxWidthTooltip>
     );
 }

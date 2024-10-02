@@ -1,6 +1,12 @@
 import { BaseProject, Project, ProjectEvent, ProjectImage } from '@/libs/adapters/projects/models';
+import { v4 } from 'uuid';
 import { IllegalEventError } from './illegal-event-errors';
 import { isEvolved } from './is-evolved';
+
+const defaultProjectImage: ProjectImage = {
+    uuid: v4(),
+    url: '/images/project-default.png',
+};
 
 const getProjectImage = (project: BaseProject, imageUuid: string): ProjectImage => ({
     uuid: imageUuid,
@@ -23,7 +29,7 @@ export const evolve = (state: Project | BaseProject, event: ProjectEvent): Proje
                 name: data.name,
                 description: data.description,
                 createdAt: data.date,
-                heroImage: null,
+                heroImage: { ...defaultProjectImage },
                 images: [],
             };
 

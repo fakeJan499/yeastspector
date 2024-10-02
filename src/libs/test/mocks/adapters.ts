@@ -27,7 +27,7 @@ export const mockCreatedProject = (model: Partial<CreatedProject> = {}): Created
         description: '',
         createdAt: new Date(),
         images: [],
-        heroImage: null,
+        heroImage: mockProjectImage(),
         ...model,
     };
 };
