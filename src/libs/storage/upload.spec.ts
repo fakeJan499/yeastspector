@@ -8,7 +8,10 @@ const mocks = vi.hoisted(() => ({
 }));
 
 vi.mock(import('firebase/storage'), () => ({ uploadBytes: mocks.uploadBytes, ref: mocks.ref }));
-vi.mock(import('./client'), () => ({ authenticate: mocks.authenticate, storage: {} }));
+vi.mock(import('./client'), () => ({
+    authenticate: mocks.authenticate,
+    getStorageClient: vi.fn().mockReturnValue({}),
+}));
 
 test('should upload a file', async () => {
     const file = new Blob();

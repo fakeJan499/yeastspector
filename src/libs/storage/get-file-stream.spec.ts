@@ -8,7 +8,10 @@ const mocks = vi.hoisted(() => ({
 }));
 
 vi.mock(import('firebase/storage'), () => ({ getStream: mocks.getStream, ref: mocks.ref }));
-vi.mock(import('./client'), () => ({ authenticate: mocks.authenticate, storage: {} }));
+vi.mock(import('./client'), () => ({
+    authenticate: mocks.authenticate,
+    getStorageClient: vi.fn().mockReturnValue({}),
+}));
 
 test('should get stream', async () => {
     const path = 'path/to/file';

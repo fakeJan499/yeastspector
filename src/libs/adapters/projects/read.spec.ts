@@ -52,7 +52,7 @@ describe('findMany', () => {
         expect(db.run).toHaveBeenCalledWith(expect.any(Function));
         expect(db.projects.findMany).toHaveBeenCalledWith(dbClient, filter);
         expect(mocks.getState).toHaveBeenCalledWith(
-            { uuid: projectDetails.uuid },
+            expect.objectContaining({ uuid: projectDetails.uuid }),
             projectDetails.events,
         );
     });

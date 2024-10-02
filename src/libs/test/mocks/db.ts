@@ -6,6 +6,7 @@ import { mockUuid } from './uuid';
 export const mockProject = (model: Partial<Project> = {}): Project => {
     return {
         uuid: mockUuid(),
+        userId: mockUuid(),
         ...model,
     };
 };
@@ -13,6 +14,7 @@ export const mockProject = (model: Partial<Project> = {}): Project => {
 export const mockProjectDetails = (model: Partial<ProjectDetails> = {}): ProjectDetails => {
     return {
         uuid: mockUuid(),
+        userId: mockUuid(),
         events: [mockProjectCreatedEvent()],
         ...model,
     };
