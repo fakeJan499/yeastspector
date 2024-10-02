@@ -2,7 +2,7 @@
 import { getEnvVariable } from '@/libs/env';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { getStorage, getStream, ref, uploadBytes } from 'firebase/storage';
+import { getStorage } from 'firebase/storage';
 
 const app = initializeApp({
     apiKey: getEnvVariable('FIREBASE_API_KEY'),
