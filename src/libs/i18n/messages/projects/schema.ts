@@ -18,6 +18,9 @@ export const projectsMessagesSchema = Z.object({
             'creation-date': Z.object({
                 header: Z.string(),
             }),
+            image: Z.object({
+                header: Z.string(),
+            }),
         }),
         pagination: Z.object({
             next: Z.string(),

@@ -22,6 +22,7 @@
         "@mui/x-date-pickers": "^7.17.0",
         "@prisma/client": "^5.19.1",
         "date-fns": "^3.6.0",
+        "firebase": "^10.13.2",
         "i18next": "^23.15.1",
         "i18next-intervalplural-postprocessor": "^3.0.0",
         "i18next-resources-to-backend": "^1.2.1",
@@ -30,6 +31,7 @@
         "react": "^18",
         "react-dom": "^18",
         "react-i18next": "^15.0.1",
+        "uuid": "^10.0.0",
         "zod": "^3.23.8"
     },
     "devDependencies": {
@@ -50,7 +52,6 @@
         "prisma": "^5.19.1",
         "prisma-json-types-generator": "^3.0.4",
         "typescript": "^5",
-        "uuid": "^10.0.0",
         "vite-tsconfig-paths": "^5.0.1",
         "vitest": "^2.0.5"
     }
