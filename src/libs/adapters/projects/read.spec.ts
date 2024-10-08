@@ -7,12 +7,13 @@ const mocks = vi.hoisted(() => {
     return {
         getState: vi.fn(),
         isEvolved: vi.fn().mockReturnValue(true),
+        isFilterValid: vi.fn().mockReturnValue(true),
 
         db: {
             run: vi.fn().mockImplementation(fn => fn()),
             projects: {
-                findMany: vi.fn(),
-                find: vi.fn(),
+                findMany: vi.fn().mockResolvedValue([]),
+                find: vi.fn().mockResolvedValue(null),
             },
         },
     };
@@ -32,11 +33,37 @@ vi.mock(import('@/libs/db'), () => {
     };
 });
 
+vi.mock(import('./validation'), () => {
+    return {
+        isFilterValid: mocks.isFilterValid,
+    };
+});
+
 afterEach(() => {
     vi.clearAllMocks();
 });
 
 describe('findMany', () => {
+    test('should validate data before querying', async () => {
+        const filter = mockAdapter.mockProjectFilter();
+        mocks.isFilterValid.mockReturnValueOnce(true);
+
+        await findMany(filter);
+
+        expect(mocks.isFilterValid.mock.invocationCallOrder[0]).toBeLessThan(
+            mocks.db.run.mock.invocationCallOrder[0],
+        );
+    });
+
+    test('should return empty array if filter is invalid', async () => {
+        const filter = mockAdapter.mockProjectFilter();
+        mocks.isFilterValid.mockReturnValueOnce(false);
+
+        const result = await findMany(filter);
+
+        expect(result).toEqual([]);
+    });
+
     test('should return projects', async () => {
         const dbClient = {};
         const filter = mockAdapter.mockProjectFilter();
@@ -72,6 +99,26 @@ describe('findMany', () => {
 });
 
 describe('find', () => {
+    test('should validate data before querying', async () => {
+        const filter = mockAdapter.mockProjectFilter();
+        mocks.isFilterValid.mockReturnValueOnce(true);
+
+        await find(filter);
+
+        expect(mocks.isFilterValid.mock.invocationCallOrder[0]).toBeLessThan(
+            mocks.db.run.mock.invocationCallOrder[0],
+        );
+    });
+
+    test('should return empty array if filter is invalid', async () => {
+        const filter = mockAdapter.mockProjectFilter();
+        mocks.isFilterValid.mockReturnValueOnce(false);
+
+        const result = await findMany(filter);
+
+        expect(result).toEqual([]);
+    });
+
     test('should return null if project not found', async () => {
         const result = await find(mockAdapter.mockProjectFilter());
 
