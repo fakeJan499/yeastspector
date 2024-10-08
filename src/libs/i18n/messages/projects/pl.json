@@ -18,6 +18,13 @@
             },
             "image": {
                 "header": "Obraz"
+            },
+            "actions": {
+                "items": {
+                    "open-details": {
+                        "label": "Otwórz szczegóły projektu {{name}}"
+                    }
+                }
             }
         },
         "pagination": {
