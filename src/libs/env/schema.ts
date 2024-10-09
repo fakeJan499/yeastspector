@@ -7,6 +7,8 @@ export const publicVariablesSchema = Z.object({
 
 export const allVariablesSchema = publicVariablesSchema.merge(
     Z.object({
+        NODE_ENV: Z.enum(['development', 'production', 'test']),
+
         AUTH0_SECRET: Z.string().min(12),
         AUTH0_BASE_URL: Z.string().url(),
         AUTH0_ISSUER_BASE_URL: Z.string().url(),
