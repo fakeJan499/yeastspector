@@ -1,0 +1,31 @@
+{
+    "header": "{{projectName}}",
+    "heading-actions": {
+        "navigate-back": "Powrót do listy projektów"
+    },
+    "details": {
+        "title": "Szczegóły",
+        "created-at": "Rozpoczęto"
+    },
+    "description": {
+        "title": "Opis",
+        "empty": "Brak opisu",
+        "actions": {
+            "edit": "Edytuj"
+        }
+    },
+    "images": {
+        "title": "Zdjęcia",
+        "empty": "Brak zdjęć",
+        "actions": {
+            "add": "Dodaj zdjęcie"
+        }
+    },
+    "timeline": {
+        "title": "Historia",
+        "types": {
+            "project-created": "Rozpoczęto projekt",
+            "project-image-uploaded": "Dodano zdjęcie"
+        }
+    }
+}

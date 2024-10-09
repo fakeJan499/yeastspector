@@ -3,11 +3,12 @@ import {
     CreatedProject,
     ProjectCreateData,
     ProjectCreatedEvent,
+    ProjectEventItem,
     ProjectFilter,
     ProjectImage,
     ProjectImageUploadedEvent,
 } from '@/libs/adapters/projects/models';
-import { RecursivePartial } from '@/libs/utils/types';
+import { PartialExcept, RecursivePartial } from '@/libs/utils/types';
 import { mockUuid } from './uuid';
 
 export const mockBaseProject = (model: RecursivePartial<BaseProject> = {}): BaseProject => {
@@ -17,6 +18,14 @@ export const mockBaseProject = (model: RecursivePartial<BaseProject> = {}): Base
         ...model,
     };
 };
+
+export const mockProjectEventItem = (
+    model: PartialExcept<ProjectEventItem, 'type'>,
+): ProjectEventItem => ({
+    uuid: mockUuid(),
+    date: new Date(),
+    ...model,
+});
 
 export const mockCreatedProject = (model: Partial<CreatedProject> = {}): CreatedProject => {
     return {
@@ -28,6 +37,7 @@ export const mockCreatedProject = (model: Partial<CreatedProject> = {}): Created
         createdAt: new Date(),
         images: [],
         heroImage: mockProjectImage(),
+        events: [mockProjectEventItem({ type: 'ProjectCreated' })],
         ...model,
     };
 };

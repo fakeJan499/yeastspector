@@ -13,6 +13,12 @@ const getProjectImage = (project: BaseProject, imageUuid: string): ProjectImage 
     url: `/projects/${project.uuid}/images/${imageUuid}`,
 });
 
+const convertEvent = (event: ProjectEvent): Project['events'][number] => ({
+    uuid: event.uuid,
+    type: event.data.type,
+    date: event.data.date,
+});
+
 export const evolve = (state: Project | BaseProject, event: ProjectEvent): Project => {
     const { data } = event;
 
@@ -31,6 +37,7 @@ export const evolve = (state: Project | BaseProject, event: ProjectEvent): Proje
                 createdAt: data.date,
                 heroImage: { ...defaultProjectImage },
                 images: [],
+                events: [convertEvent(event)],
             };
 
         case 'ProjectImageUploaded':
@@ -50,6 +57,7 @@ export const evolve = (state: Project | BaseProject, event: ProjectEvent): Proje
                     ? getProjectImage(state, data.imageUuid)
                     : state.heroImage,
                 images: [...state.images, getProjectImage(state, data.imageUuid)],
+                events: [...state.events, convertEvent(event)],
             };
     }
 };

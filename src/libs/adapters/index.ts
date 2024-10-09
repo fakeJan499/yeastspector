@@ -1,8 +1,8 @@
 import * as projects from './projects';
-import type { Project } from './projects';
+import type { Project, ProjectEventItem } from './projects';
 
 const adapters = { projects } as const;
 
 export default adapters;
 
-export type { Project };
+export type { Project, ProjectEventItem };

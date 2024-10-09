@@ -25,9 +25,14 @@ type ProjectImageUploadedEventData = BaseProjectEventData<
 >;
 export type ProjectImageUploadedEvent = BaseProjectEvent<ProjectImageUploadedEventData>;
 
+type ProjectEventData = ProjectCreatedEventData | ProjectImageUploadedEventData;
+export type ProjectEventType = ProjectEventData['type'];
+
 export type ProjectEvent = BaseProjectEvent<
     ProjectCreatedEventData | ProjectImageUploadedEventData
 >;
+
+export type ProjectEventItem = { uuid: string; type: ProjectEventType; date: Date };
 
 export type BaseProject = {
     uuid: string;
@@ -40,6 +45,7 @@ export type CreatedProject = BaseProject & {
     createdAt: Date;
     heroImage: ProjectImage;
     images: ProjectImage[];
+    events: ProjectEventItem[];
 };
 export type Project = CreatedProject;
 

@@ -21,6 +21,13 @@ export const projectsMessagesSchema = Z.object({
             image: Z.object({
                 header: Z.string(),
             }),
+            actions: Z.object({
+                items: Z.object({
+                    'open-details': Z.object({
+                        label: Z.string(),
+                    }),
+                }),
+            }),
         }),
         pagination: Z.object({
             next: Z.string(),

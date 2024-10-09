@@ -39,6 +39,20 @@ describe(`ProjectCreated`, () => {
         expect(evolvedProject.heroImage.url).toEqual('/images/project-default.png');
         expect(validate(evolvedProject.heroImage.uuid)).toBeTruthy();
     });
+
+    test('should add event to project', () => {
+        const project = mockAdapter.mockBaseProject();
+        const event = mockAdapter.mockProjectCreateEvent();
+        const expectedProjectEvent = mockAdapter.mockProjectEventItem({
+            type: 'ProjectCreated',
+            uuid: event.uuid,
+            date: event.data.date,
+        });
+
+        const evolvedProject = evolve(project, event);
+
+        expect(evolvedProject.events).toEqual([expectedProjectEvent]);
+    });
 });
 
 describe(`ProjectImageUploaded`, () => {
@@ -94,5 +108,23 @@ describe(`ProjectImageUploaded`, () => {
             uuid: event.data.imageUuid,
             url: expect.any(String),
         });
+    });
+
+    test('should append event to project', () => {
+        const project = mockAdapter.mockCreatedProject();
+        const event = mockAdapter.mockProjectImageUploadedEvent();
+        const expectedProjectEvent = mockAdapter.mockProjectEventItem({
+            type: 'ProjectImageUploaded',
+            uuid: event.uuid,
+            date: event.data.date,
+        });
+
+        const evolvedProject = evolve(project, event);
+
+        expect(evolvedProject.events.length).toBe(project.events.length + 1);
+        expect(
+            evolvedProject.events[evolvedProject.events.length - 1],
+            'ProjectImageUploaded should be last event',
+        ).toEqual(expectedProjectEvent);
     });
 });
