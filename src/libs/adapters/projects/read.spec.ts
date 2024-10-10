@@ -8,6 +8,7 @@ const mocks = vi.hoisted(() => {
         getState: vi.fn(),
         isEvolved: vi.fn().mockReturnValue(true),
         isFilterValid: vi.fn().mockReturnValue(true),
+        convertEvents: vi.fn().mockImplementation(events => events),
 
         db: {
             run: vi.fn().mockImplementation(fn => fn()),
@@ -36,6 +37,12 @@ vi.mock(import('@/libs/db'), () => {
 vi.mock(import('./validation'), () => {
     return {
         isFilterValid: mocks.isFilterValid,
+    };
+});
+
+vi.mock(import('./converters'), () => {
+    return {
+        convertEvents: mocks.convertEvents,
     };
 });
 
