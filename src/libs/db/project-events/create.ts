@@ -3,6 +3,7 @@ import {
     ProjectCreatedEvent,
     ProjectEvent,
     ProjectEventCreate,
+    ProjectHeroImageUpdatedEvent,
     ProjectImageUploadedEvent,
 } from './models';
 
@@ -24,4 +25,9 @@ export const createProjectCreatedEvent = async (
 export const createProjectImageUploadedEvent = async (
     db: DbClient,
     data: ProjectEventCreate<ProjectImageUploadedEvent>,
+): Promise<ProjectEvent> => create(db, data);
+
+export const createProjectHeroImageUpdatedEvent = async (
+    db: DbClient,
+    data: ProjectEventCreate<ProjectHeroImageUpdatedEvent>,
 ): Promise<ProjectEvent> => create(db, data);

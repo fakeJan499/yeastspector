@@ -20,7 +20,16 @@ export type ProjectImageUploadedEventData = BaseProjectEventData<
 >;
 export type ProjectImageUploadedEvent = BaseProjectEvent<ProjectImageUploadedEventData>;
 
-export type ProjectEventData = ProjectCreatedEventData | ProjectImageUploadedEventData;
+export type ProjectHeroImageUpdatedEventData = BaseProjectEventData<
+    'ProjectHeroImageUpdated',
+    { imageUuid: string; date: Date }
+>;
+export type ProjectHeroImageUpdatedEvent = BaseProjectEvent<ProjectHeroImageUpdatedEventData>;
+
+export type ProjectEventData =
+    | ProjectCreatedEventData
+    | ProjectImageUploadedEventData
+    | ProjectHeroImageUpdatedEventData;
 export type ProjectEvent = BaseProjectEvent<ProjectEventData>;
 
 export type ProjectEventCreate<T extends ProjectEvent> = Omit<T, 'uuid'>;

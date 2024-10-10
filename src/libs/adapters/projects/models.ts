@@ -25,11 +25,20 @@ type ProjectImageUploadedEventData = BaseProjectEventData<
 >;
 export type ProjectImageUploadedEvent = BaseProjectEvent<ProjectImageUploadedEventData>;
 
-type ProjectEventData = ProjectCreatedEventData | ProjectImageUploadedEventData;
+type ProjectHeroImageUpdatedEventData = BaseProjectEventData<
+    'ProjectHeroImageUpdated',
+    { newHeroImageUuid: string; date: Date }
+>;
+export type ProjectHeroImageUpdatedEvent = BaseProjectEvent<ProjectHeroImageUpdatedEventData>;
+
+type ProjectEventData =
+    | ProjectCreatedEventData
+    | ProjectImageUploadedEventData
+    | ProjectHeroImageUpdatedEventData;
 export type ProjectEventType = ProjectEventData['type'];
 
 export type ProjectEvent = BaseProjectEvent<
-    ProjectCreatedEventData | ProjectImageUploadedEventData
+    ProjectCreatedEventData | ProjectImageUploadedEventData | ProjectHeroImageUpdatedEventData
 >;
 
 export type ProjectEventItem = { uuid: string; type: ProjectEventType; date: Date };
@@ -59,5 +68,10 @@ export type ProjectImageUploadData = {
     image: Blob;
     date: Date;
     isDefault: boolean;
+};
+export type ProjectHeroImageUpdateData = {
+    projectUuid: string;
+    newHeroImageUuid: string;
+    date: Date;
 };
 export type ProjectFilter = { userId?: string; uuid?: string };

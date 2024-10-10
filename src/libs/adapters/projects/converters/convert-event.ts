@@ -8,7 +8,7 @@ export const convertEvent = (event: DbProjectEvent): AdaptedProjectEvent => {
     switch (event.data.type) {
         case 'ProjectCreated':
             return {
-                uuid: event.projectUuid,
+                uuid: event.uuid,
                 projectUuid: event.projectUuid,
                 data: {
                     type: 'ProjectCreated',
@@ -19,7 +19,7 @@ export const convertEvent = (event: DbProjectEvent): AdaptedProjectEvent => {
             };
         case 'ProjectImageUploaded':
             return {
-                uuid: event.projectUuid,
+                uuid: event.uuid,
                 projectUuid: event.projectUuid,
                 data: {
                     type: 'ProjectImageUploaded',
@@ -30,7 +30,7 @@ export const convertEvent = (event: DbProjectEvent): AdaptedProjectEvent => {
             };
         case 'ProjectHeroImageUpdated':
             return {
-                uuid: event.projectUuid,
+                uuid: event.uuid,
                 projectUuid: event.projectUuid,
                 data: {
                     type: 'ProjectHeroImageUpdated',

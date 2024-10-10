@@ -1,7 +1,7 @@
 import db from '@/libs/db';
 import { upload } from '@/libs/storage';
 import { v4 } from 'uuid';
-import { ProjectImageUploadData } from './models';
+import { ProjectHeroImageUpdateData, ProjectImageUploadData } from './models';
 
 export const uploadImage = async (data: ProjectImageUploadData): Promise<string> => {
     return db.runInTransaction(async tx => {
@@ -18,4 +18,19 @@ export const uploadImage = async (data: ProjectImageUploadData): Promise<string>
         await upload(`projects/${data.projectUuid}/images/${imageUuid}`, data.image);
         return imageUuid;
     });
+};
+
+export const setHeroImage = async (data: ProjectHeroImageUpdateData): Promise<string> => {
+    await db.run(async ctx => {
+        await db.projectEvents.createProjectHeroImageUpdatedEvent(ctx, {
+            projectUuid: data.projectUuid,
+            data: {
+                type: 'ProjectHeroImageUpdated',
+                imageUuid: data.newHeroImageUuid,
+                date: data.date,
+            },
+        });
+    });
+
+    return data.newHeroImageUuid;
 };

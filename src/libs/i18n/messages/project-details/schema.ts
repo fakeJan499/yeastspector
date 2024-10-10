@@ -24,6 +24,11 @@ export const projectDetailsMessagesSchema = Z.object({
                 title: Z.string(),
                 success: Z.string(),
             }),
+            'set-hero-image': Z.object({
+                title: Z.string(),
+                success: Z.string(),
+                'already-set': Z.string(),
+            }),
         }),
     }),
     timeline: Z.object({
@@ -31,6 +36,7 @@ export const projectDetailsMessagesSchema = Z.object({
         types: Z.object({
             'project-created': Z.string(),
             'project-image-uploaded': Z.string(),
+            'project-hero-image-changed': Z.string(),
         }),
     }),
 });

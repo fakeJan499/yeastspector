@@ -3,6 +3,7 @@ import {
     Project,
     ProjectCreatedEvent,
     ProjectEvent,
+    ProjectHeroImageUpdatedEvent,
     ProjectImage,
     ProjectImageUploadedEvent,
 } from '@/libs/adapters/projects/models';
@@ -71,12 +72,36 @@ const handleImageUpload = (
     };
 };
 
+const handleHeroImageUpdate = (
+    state: Project | BaseProject,
+    event: ProjectHeroImageUpdatedEvent,
+): Project => {
+    if (!isEvolved(state)) {
+        throw new IllegalEventError(
+            `Cannot apply event of type ${event.data.type} to not evolved Project`,
+        );
+    }
+
+    if (!state.images.some(x => x.uuid === event.data.newHeroImageUuid)) {
+        throw new IllegalEventError(
+            `Cannot set hero image to image that does not exist in Project`,
+        );
+    }
+
+    return {
+        ...state,
+        heroImage: getProjectImage(state, event.data.newHeroImageUuid),
+        events: [...state.events, convertEvent(event)],
+    };
+};
+
 export const evolve = (state: Project | BaseProject, event: ProjectEvent): Project => {
     switch (event.data.type) {
         case 'ProjectCreated':
             return handleProjectCreation(state, event as ProjectCreatedEvent);
-
         case 'ProjectImageUploaded':
             return handleImageUpload(state, event as ProjectImageUploadedEvent);
+        case 'ProjectHeroImageUpdated':
+            return handleHeroImageUpdate(state, event as ProjectHeroImageUpdatedEvent);
     }
 };
