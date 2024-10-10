@@ -106,9 +106,10 @@ test('should create project with image', async () => {
         `projects/${createdProjectDbResult.uuid}/images/${imageUuid}`,
         image,
     );
-    expect(mocks.getState.mock.calls[0][1], 'events must contain ProjectImageUploaded').toContain(
-        projectImageUploadedEventDbResult,
-    );
+    expect(
+        mocks.getState.mock.calls[0][1],
+        'events must contain ProjectImageUploaded',
+    ).toContainEqual(projectImageUploadedEventDbResult);
 });
 
 test('should create events with specified date', async () => {

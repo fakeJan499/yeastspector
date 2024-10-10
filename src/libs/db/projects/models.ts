@@ -1,4 +1,4 @@
-import { ProjectEvent } from '@/libs/adapters/projects/models';
+import { ProjectEvent } from '@/libs/db/project-events/models';
 
 export type Project = {
     uuid: string;

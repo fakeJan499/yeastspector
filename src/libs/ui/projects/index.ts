@@ -8,3 +8,4 @@ export * from './project-image-cell';
 export * from './project-images-card';
 export * from './project-list';
 export * from './project-timeline-card';
+export * from './project-hero-image-indication-button';

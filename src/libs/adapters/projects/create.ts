@@ -1,6 +1,7 @@
 import db from '@/libs/db';
 import { upload } from '@/libs/storage';
 import { v4 } from 'uuid';
+import { convertEvents } from './converters';
 import { Project, ProjectCreateData } from './models';
 import { getState, isEvolved } from './state';
 
@@ -39,7 +40,7 @@ export const create = async (data: ProjectCreateData): Promise<Project> => {
 
     const project = getState(
         { uuid: projectRawData.uuid, userId: data.userId },
-        projectRawData.events,
+        convertEvents(projectRawData.events),
     );
 
     // It should never happen.

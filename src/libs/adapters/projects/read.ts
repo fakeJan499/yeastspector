@@ -1,4 +1,5 @@
 import db from '@/libs/db';
+import { convertEvents } from './converters';
 import { Project, ProjectFilter } from './models';
 import { getState, isEvolved } from './state';
 import { isFilterValid } from './validation';
@@ -8,7 +9,9 @@ export const findMany = async (filter: ProjectFilter): Promise<Project[]> => {
 
     const projects = await db.run(client => db.projects.findMany(client, filter));
     return projects
-        .map(project => getState({ uuid: project.uuid, userId: project.userId }, project.events))
+        .map(project =>
+            getState({ uuid: project.uuid, userId: project.userId }, convertEvents(project.events)),
+        )
         .filter(isEvolved);
 };
 
@@ -23,7 +26,7 @@ export const find = async (filter: ProjectFilter): Promise<Project | null> => {
 
     const project = getState(
         { uuid: rawProject.uuid, userId: rawProject.userId },
-        rawProject.events,
+        convertEvents(rawProject.events),
     );
 
     return isEvolved(project) ? project : null;

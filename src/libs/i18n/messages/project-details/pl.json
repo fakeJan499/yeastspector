@@ -18,14 +18,23 @@
         "title": "Zdjęcia",
         "empty": "Brak zdjęć",
         "actions": {
-            "add": "Dodaj zdjęcie"
+            "add": {
+                "title": "Dodaj zdjęcie",
+                "success": "Zdjęcie zostało dodane"
+            },
+            "set-hero-image": {
+                "title": "Ustaw jako zdjęcie główne",
+                "success": "Zdjęcie główne zostało zmienione",
+                "already-set": "To zdjęcie jest już ustawione jako główne"
+            }
         }
     },
     "timeline": {
         "title": "Historia",
         "types": {
             "project-created": "Rozpoczęto projekt",
-            "project-image-uploaded": "Dodano zdjęcie"
+            "project-image-uploaded": "Dodano zdjęcie",
+            "project-hero-image-changed": "Zmieniono zdjęcie główne"
         }
     }
 }

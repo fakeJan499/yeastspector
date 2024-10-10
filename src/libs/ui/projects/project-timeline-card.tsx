@@ -2,6 +2,7 @@ import { Project, ProjectEventItem } from '@/libs/adapters';
 import { useI18n } from '@/libs/i18n';
 import { formatDate } from '@/libs/utils/date';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import ImagesearchRollerIcon from '@mui/icons-material/ImagesearchRoller';
 import StartIcon from '@mui/icons-material/Start';
 import {
     Timeline,
@@ -26,6 +27,8 @@ export async function ProjectTimelineCard({ project }: Props) {
                 return t('timeline.types.project-created');
             case 'ProjectImageUploaded':
                 return t('timeline.types.project-image-uploaded');
+            case 'ProjectHeroImageUpdated':
+                return t('timeline.types.project-hero-image-changed');
         }
     };
 
@@ -34,18 +37,19 @@ export async function ProjectTimelineCard({ project }: Props) {
             case 'ProjectCreated':
                 return 'success';
             case 'ProjectImageUploaded':
+            case 'ProjectHeroImageUpdated':
                 return 'secondary';
-            default:
-                return undefined;
         }
     };
 
-    const getEventTypeIcon = (event: ProjectEventItem): React.ReactNode => {
+    const getEventTypeIcon = (event: ProjectEventItem): React.JSX.Element => {
         switch (event.type) {
             case 'ProjectCreated':
                 return <StartIcon />;
             case 'ProjectImageUploaded':
                 return <AddPhotoAlternateIcon />;
+            case 'ProjectHeroImageUpdated':
+                return <ImagesearchRollerIcon />;
         }
     };
 
