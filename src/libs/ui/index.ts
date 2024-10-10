@@ -6,3 +6,4 @@ export * from './projects';
 export * from './theme-provider';
 export * from './visually-hidden-input';
 export * from './image-input';
+export * from './alert-snackbar';

@@ -3,6 +3,7 @@ export * from './project-create-form-dialog';
 export * from './project-description-card';
 export * from './project-details-card';
 export * from './project-hero-image-card';
+export * from './project-image-add-button';
 export * from './project-image-cell';
 export * from './project-images-card';
 export * from './project-list';

@@ -1,8 +1,8 @@
 import { Project } from '@/libs/adapters';
 import { useI18n } from '@/libs/i18n';
-import AddIcon from '@mui/icons-material/Add';
-import { Card, CardContent, CardHeader, Grid2, IconButton, Typography } from '@mui/material';
+import { Card, CardContent, CardHeader, Grid2, Typography } from '@mui/material';
 import Image from 'next/image';
+import { ProjectImageAddButton } from './project-image-add-button';
 
 type Props = {
     project: Project;
@@ -15,17 +15,13 @@ export async function ProjectImagesCard({ project }: Props) {
         <Card>
             <CardHeader
                 title={t('images.title')}
-                action={
-                    <IconButton aria-label={t('images.actions.add')}>
-                        <AddIcon />
-                    </IconButton>
-                }
+                action={<ProjectImageAddButton project={project} />}
             />
             <CardContent>
                 {project.images.length === 0 ? (
                     <Typography>{t('images.empty')}</Typography>
                 ) : (
-                    <Grid2 container gap={1} component="ul">
+                    <Grid2 container spacing={1} component="ul">
                         {project.images.map(image => (
                             <Grid2
                                 key={image.uuid}

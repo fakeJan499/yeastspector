@@ -53,4 +53,11 @@ export type ProjectCreateData = Omit<ProjectCreatedEventData, 'type'> & {
     userId: string;
     image: Blob | null;
 };
+export type ProjectImageUploadData = {
+    userId: string;
+    projectUuid: string;
+    image: Blob;
+    date: Date;
+    isDefault: boolean;
+};
 export type ProjectFilter = { userId?: string; uuid?: string };
