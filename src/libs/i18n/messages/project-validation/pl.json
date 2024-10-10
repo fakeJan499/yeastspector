@@ -1,0 +1,29 @@
+{
+    "fields": {
+        "name": {
+            "errors": {
+                "required": "Nazwa jest wymagana.",
+                "min-length": "Nazwa musi mieć co najmniej {{count}} $t(general:plurals.chars, { \"count\": {{count}}, \"postProcess\": \"interval\", \"applyPostProcessor\": true }).",
+                "max-length": "Nazwa nie może mieć więcej niż {{count}} $t(general:plurals.chars, { \"count\": {{count}}, \"postProcess\": \"interval\", \"applyPostProcessor\": true })."
+            }
+        },
+        "description": {
+            "errors": {
+                "max-length": "Opis jest za długi o {{count}} $t(general:plurals.chars, { \"count\": {{count}}, \"postProcess\": \"interval\", \"applyPostProcessor\": true })."
+            }
+        },
+        "date": {
+            "errors": {
+                "required": "Data nastawienia jest wymagana.",
+                "max": "Data nastawienia nie może być późniejsza niż dzisiaj."
+            }
+        },
+        "images": {
+            "errors": {
+                "max-size": "Zdjęcie jest za duże. Maksymalny rozmiar to {{count}} MB.",
+                "invalid-type": "Zdjęcie ma niepoprawny format.",
+                "max-count": "Przekroczono limit zdjęć. Maksymalna liczba zdjęć to {{count}}."
+            }
+        }
+    }
+}

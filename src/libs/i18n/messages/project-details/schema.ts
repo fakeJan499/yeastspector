@@ -20,7 +20,10 @@ export const projectDetailsMessagesSchema = Z.object({
         title: Z.string(),
         empty: Z.string(),
         actions: Z.object({
-            add: Z.string(),
+            add: Z.object({
+                title: Z.string(),
+                success: Z.string(),
+            }),
         }),
     }),
     timeline: Z.object({
